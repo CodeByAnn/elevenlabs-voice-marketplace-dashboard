@@ -1,0 +1,12 @@
+{
+  "snapshot_date": "2026-08-15",
+  "source": "https://api.elevenlabs.io/v1/shared-voices",
+  "page_size": 3,
+  "mode": "public_discovery_sample",
+  "fetched_pages": 81,
+  "skipped_queries": 176,
+  "raw_count": 246,
+  "voice_count": 196,
+  "duplicates_removed": 50,
+  "generated_at": "2026-08-15T17:59:03.827Z"
+}

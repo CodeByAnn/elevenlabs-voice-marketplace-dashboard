@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The $22M AI Voice Economy | ElevenLabs Voice Marketplace</title>
+  <meta name="description" content="An interactive editorial dashboard exploring what the internet wants AI to sound like through ElevenLabs Voice Library usage data.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;650;750;850;900&family=Newsreader:opsz,wght@6..72,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=elevenlabs-light-20260817-3">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <header class="brand-nav" aria-label="ElevenLabs dashboard header">
+        <a class="brand-logo" href="#hero-title" aria-label="ElevenLabs Voice Marketplace dashboard">
+          <span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="logo-word"><b>Eleven</b><b>Labs</b></span>
+        </a>
+        <nav aria-label="Dashboard sections">
+          <a href="#top-title">Voices</a>
+          <a href="#momentum-title">Momentum</a>
+          <a href="#accent-title">Accents</a>
+          <a href="#creator-title">Creators</a>
+        </nav>
+      </header>
+      <div class="hero-copy">
+        <p class="eyebrow">ElevenLabs Voice Marketplace</p>
+        <h1 id="hero-title">The $22M AI Voice Economy</h1>
+        <p class="lede">What do we actually want AI to sound like?</p>
+      </div>
+      <div class="hero-metrics" aria-label="ElevenLabs marketplace and company signals">
+        <article>
+          <span>Paid to voice creators</span>
+          <strong>$22M+</strong>
+        </article>
+        <article>
+          <span>Earning creators</span>
+          <strong>10.4K+</strong>
+        </article>
+        <article>
+          <span>ARR signal</span>
+          <strong>$500M+</strong>
+        </article>
+        <article>
+          <span>Valuation</span>
+          <strong>$11B</strong>
+        </article>
+      </div>
+      <div class="hero-lens">
+        <div>
+          <span class="stat-label">Current snapshot</span>
+          <strong id="snapshotVoices">--</strong>
+          <small>unique public voices</small>
+        </div>
+        <div>
+          <span class="stat-label">Usage analyzed</span>
+          <strong id="snapshotUsage">--</strong>
+          <small>characters, 1Y</small>
+        </div>
+        <div>
+          <span class="stat-label">Clone graph</span>
+          <strong id="snapshotClones">--</strong>
+          <small>library adds</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="control-strip" aria-label="Interactive filters">
+      <label>
+        <span>Search</span>
+        <input id="searchInput" type="search" placeholder="Voice, accent, use case">
+      </label>
+      <label>
+        <span>Language</span>
+        <select id="languageFilter"></select>
+      </label>
+      <label>
+        <span>Use case</span>
+        <select id="useCaseFilter"></select>
+      </label>
+      <label>
+        <span>Accent</span>
+        <select id="accentFilter"></select>
+      </label>
+      <label>
+        <span>Gender</span>
+        <select id="genderFilter"></select>
+      </label>
+      <label class="range-field">
+        <span>Min clones <b id="cloneValue">0</b></span>
+        <input id="cloneFilter" type="range" min="0" max="1000000" step="1000" value="0">
+      </label>
+      <button id="resetFilters" type="button">Reset</button>
+    </section>
+
+    <section class="story-block top-block" aria-labelledby="top-title">
+      <div class="section-copy">
+        <p class="kicker">01 / Top AI voices</p>
+        <h2 id="top-title">The market rewards casual, social, human-sounding voices.</h2>
+        <p id="topInsight">Loading top voices from the snapshot.</p>
+      </div>
+      <div class="top-list" id="topVoices"></div>
+    </section>
+
+    <section class="story-block scatter-block" aria-labelledby="momentum-title">
+      <div class="section-copy">
+        <p class="kicker">02 / Viral voices</p>
+        <h2 id="momentum-title">7-day usage momentum separates current demand from accumulated fame.</h2>
+        <p>Bubble size tracks clone count. Color groups the market by use case. Hover or tap any voice to inspect the usage mix.</p>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-head">
+          <div>
+            <span>7-day usage momentum</span>
+            <h3>Annual usage vs recent usage</h3>
+          </div>
+          <div class="legend" id="scatterLegend"></div>
+        </div>
+        <div id="scatterChart" class="chart"></div>
+      </div>
+    </section>
+
+    <section class="story-block sound-block" aria-labelledby="sound-title">
+      <div class="section-copy">
+        <p class="kicker">03 / What does AI sound like?</p>
+        <h2 id="sound-title">Demand clusters around voice characteristics, not just names.</h2>
+        <p id="soundInsight">Use the tabs to compare descriptive style, accent, gender, age, use case and language.</p>
+      </div>
+      <div class="chart-panel">
+        <div class="tabs" role="tablist" aria-label="Sound characteristic views">
+          <button class="tab active" data-dimension="descriptive" type="button">Style</button>
+          <button class="tab" data-dimension="accent" type="button">Accent</button>
+          <button class="tab" data-dimension="gender" type="button">Gender</button>
+          <button class="tab" data-dimension="age" type="button">Age</button>
+          <button class="tab" data-dimension="use_case" type="button">Use case</button>
+          <button class="tab" data-dimension="language" type="button">Language</button>
+        </div>
+        <div id="soundChart" class="chart compact-chart"></div>
+      </div>
+    </section>
+
+    <section class="story-block accent-block" aria-labelledby="accent-title">
+      <div class="section-copy">
+        <p class="kicker">04 / Accent economy</p>
+        <h2 id="accent-title">Demand density spots accents where usage outruns supply.</h2>
+        <p id="accentInsight">Demand density equals annual usage divided by available voices in the filtered view.</p>
+      </div>
+      <div class="chart-panel">
+        <div class="chart-head">
+          <div>
+            <span>Demand density</span>
+            <h3>Usage per available voice by accent</h3>
+          </div>
+          <div class="unit">1Y chars / voice</div>
+        </div>
+        <div id="accentChart" class="chart"></div>
+      </div>
+    </section>
+
+    <section class="story-block creator-block" aria-labelledby="creator-title">
+      <div class="section-copy">
+        <p class="kicker">05 / Creator power law</p>
+        <h2 id="creator-title">A small creator tier captures an unequal share of usage.</h2>
+        <p id="creatorInsight">The Lorenz curve shows how concentrated the marketplace is after filters are applied.</p>
+      </div>
+      <div class="creator-grid">
+        <div class="creator-stat">
+          <span>Top 1% usage share</span>
+          <strong id="topOneShare">--</strong>
+          <p id="creatorCount">-- creators in view</p>
+        </div>
+        <div class="chart-panel">
+          <div class="chart-head">
+            <div>
+              <span>Concentration curve</span>
+              <h3>Creator usage distribution</h3>
+            </div>
+          </div>
+          <div id="lorenzChart" class="chart compact-chart"></div>
+        </div>
+        <div class="top-creators" id="topCreators"></div>
+      </div>
+    </section>
+
+    <section class="timeline-section" aria-labelledby="timeline-title">
+      <div class="timeline-copy">
+        <p class="kicker">06 / Company timeline</p>
+        <h2 id="timeline-title">The company grew fast. The marketplace grew even faster, BIG TIME!</h2>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <footer>
+      <span id="sourceNote">Source: ElevenLabs public Voice Library API snapshot.</span>
+      <span class="source-detail">* Analysis based on 196 voices returned by the public Voice Library API.</span>
+    </footer>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="script.js?v=elevenlabs-light-20260817-3"></script>
+</body>
+</html>
